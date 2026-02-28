@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="tg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Китобхона</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <style>
+      /* ===== Layout ===== */
+      body,
+      html {
+        margin: 0;
+        font-family: Arial;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        flex: 1;
+      }
+
+      /* Меню */
+      .nav {
+        background: #3f43d9;
+        padding: 15px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .nav a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 8px 12px;
+        border-radius: 5px;
+      }
+      .nav a:hover {
+        background: orange;
+        color: white;
+      }
+
+      /* Слайдер */
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+      }
+      .slides {
+        display: flex;
+        width: 500%;
+        animation: slide 25s infinite;
+        height: 100%;
+      }
+      .slides img {
+        width: 20%;
+        height: 400px;
+        object-fit: cover;
+      }
+      @keyframes slide {
+        0%,
+        16% {
+          transform: translateX(0);
+        }
+        20%,
+        36% {
+          transform: translateX(-20%);
+        }
+        40%,
+        56% {
+          transform: translateX(-40%);
+        }
+        60%,
+        76% {
+          transform: translateX(-60%);
+        }
+        80%,
+        96% {
+          transform: translateX(-80%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      /* Китобҳои нав (20 максимум) */
+      .new-books {
+        padding: 50px 40px;
+        background: white;
+        text-align: center;
+      }
+      .new-books h2 {
+        color: #3f43d9;
+        margin-bottom: 30px;
+        font-size: 28px;
+      }
+      .new-books-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+      }
+      .book-item {
+        background: #f9f9f9;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+      .book-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      .book-item img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+      .book-item h4 {
+        padding: 10px;
+        font-size: 16px;
+        margin: 0;
+      }
+      .book-item button {
+        margin: 10px;
+        padding: 6px 10px;
+        border: none;
+        background: #3f43d9;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .book-item button:hover {
+        background: orange;
+      }
+
+      /* Формаи иловаи китоб */
+      .add-book {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px auto;
+        max-width: 600px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .add-book input,
+      .add-book button {
+        margin: 5px;
+        padding: 10px;
+        width: 90%;
+      }
+      .add-book button {
+        width: auto;
+      }
+
+      /* Формаи бақайдгирӣ */
+      .register,
+      .login {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px auto;
+        max-width: 400px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        display: none;
+      }
+      .register input,
+      .login input,
+      .register button,
+      .login button {
+        margin: 5px;
+        padding: 10px;
+        width: 90%;
+      }
+      .register button,
+      .login button {
+        width: auto;
+      }
+
+      /* Ҷустуҷӯ */
+      .search-bar {
+        margin-bottom: 20px;
+      }
+      .search-bar input {
+        padding: 8px;
+        width: 80%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      /* Footer */
+      .footer {
+        background: #3f43d9;
+        color: white;
+        padding: 40px 20px 20px 20px;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .footer-column {
+        flex: 1 1 250px;
+        min-width: 250px;
+      }
+      .footer-column h3 {
+        margin-bottom: 15px;
+      }
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+      }
+      .footer-column a {
+        color: #ffb347;
+        text-decoration: none;
+      }
+      .footer-column a:hover {
+        color: white;
+      }
+      .footer-bottom {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 15px;
+      }
+      @media (max-width: 1200px) {
+        .new-books-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 768px) {
+        .new-books-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 500px) {
+        .new-books-grid {
+          grid-template-columns: 1fr;
+        }
+        .slides img {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Меню -->
+      <div class="nav">
+        <a onclick="showSection('home')">Асосӣ</a>
+        <a onclick="showSection('books')">Китобҳо</a>
+        <a onclick="showSection('audio')">Аудио китобҳо</a>
+        <a onclick="showSection('video')">Видео дарсҳо</a>
+        <a onclick="showSection('search')">Ҷустуҷӯ</a>
+        <a onclick="showSection('register')">Бақайдгирӣ</a>
+        <a onclick="showSection('login')">Воридшавӣ</a>
+      </div>
+
+      <!-- Асосӣ / Слайдер -->
+      <div id="home">
+        <div class="hero">
+          <div class="slides">
+            <img src="1.jpg" />
+            <img src="2.jpg" />
+            <img src="3.jpg" />
+            <img src="4.jpg" />
+            <img src="5.jpg" />
+          </div>
+          <div class="content">
+            <h1>МД "ДОНИШКАДАИ БАЙНАЛМИЛАЛИИ ХУҶАНД"-И МД "ДБССТ"</h1>
+            <h1>Китобхонаи электронӣ</h1>
+            <p>Зиёда аз 1000+ китоби электронӣ</p>
+          </div>
+        </div>
+
+        <!-- Китобҳои нав (20 максимум) -->
+        <section class="new-books" id="newBooksSection">
+          <h2>📚 Китобҳои навдохилшуда</h2>
+          <div class="new-books-grid" id="newBooksGrid"></div>
+        </section>
+      </div>
+
+      <!-- Менюи Китобҳо -->
+      <div id="books" style="display: none; padding: 30px">
+        <h2>Рӯйхати китобҳо</h2>
+        <div id="bookList" class="new-books-grid"></div>
+
+        <h2>Иловаи китоб</h2>
+        <div class="add-book">
+          <input type="text" id="title" placeholder="Номи китоб" />
+          <input type="text" id="author" placeholder="Муаллиф" />
+          <input type="file" id="image" accept="image/*" />
+          <input type="file" id="pdf" accept=".pdf,.jifl" />
+          <button onclick="addBook()">Илова</button>
+        </div>
+      </div>
+
+      <!-- Аудио -->
+      <div id="audio" style="display: none; padding: 30px">
+        <h2>Аудио китобҳо</h2>
+      </div>
+
+      <!-- Видео -->
+      <div id="video" style="display: none; padding: 30px">
+        <h2>Видео дарсҳо</h2>
+      </div>
+
+      <!-- Ҷустуҷӯ -->
+      <div id="search" style="display: none; padding: 30px">
+        <h2>Ҷустуҷӯи китобҳо</h2>
+        <div class="search-bar">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Номи китоб ё муаллифро ворид кунед"
+            oninput="searchBooks()"
+          />
+        </div>
+        <div id="searchResults" class="new-books-grid"></div>
+      </div>
+
+      <!-- Бақайдгирӣ -->
+      <div id="register" class="register">
+        <h2>Бақайдгирӣ</h2>
+        <input type="text" id="regUser" placeholder="Номи корбар" />
+        <input type="password" id="regPass" placeholder="Рамз" />
+        <button onclick="registerUser()">Бақайдгирӣ</button>
+      </div>
+
+      <!-- Воридшавӣ -->
+      <div id="login" class="login">
+        <h2>Воридшавӣ</h2>
+        <input type="text" id="loginUser" placeholder="Номи корбар" />
+        <input type="password" id="loginPass" placeholder="Рамз" />
+        <button onclick="loginUser()">Воридшавӣ</button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>ТАҲИЯГАР:</h3>
+          <p>Зарифов Саидсами Саидқудусович</p>
+          <p>тел: +992-92-614-14-65</p>
+        </div>
+        <div class="footer-column">
+          <h3>МАЪЛУМОТИ ДОНШКАДА:</h3>
+          <p>
+            Соли таъсисёбӣ: <strong>2021 сол</strong><br />Китобхонаи электронӣ:
+            <strong>20.02.2026</strong>
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3>ПАЙВАНДҲО:</h3>
+          <ul>
+            <li><a href="#">Китобҳо</a></li>
+            <li><a href="#">Аудио китобҳо</a></li>
+            <li><a href="#">Видео дарсҳо</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Донишкадаи Байналмилалии Хуҷанд</div>
+    </footer>
+
+    <script>
+      // Навигатсия
+      function showSection(id) {
+        [
+          "home",
+          "books",
+          "audio",
+          "video",
+          "search",
+          "register",
+          "login",
+        ].forEach((s) => (document.getElementById(s).style.display = "none"));
+        document.getElementById(id).style.display = "block";
+      }
+
+      // Китобҳо
+      let books = JSON.parse(localStorage.getItem("books")) || [];
+
+      // Ҷустуҷӯ
+      function searchBooks() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const results = document.getElementById("searchResults");
+        results.innerHTML = "";
+        books
+          .filter(
+            (b) =>
+              b.title.toLowerCase().includes(query) ||
+              b.author.toLowerCase().includes(query)
+          )
+          .forEach((b) => {
+            const div = document.createElement("div");
+            div.className = "book-item";
+            div.innerHTML = `<img src="${b.image}"><h4>${b.title}</h4><p>${b.author}</p>
+         <button onclick="window.open('${b.pdf}','_blank')">Дидани файл</button>`;
+            results.appendChild(div);
+          });
+      }
+
+      // Намоянда ва нав
+      function renderBooks() {
+        const newGrid = document.getElementById("newBooksGrid");
+        const bookList = document.getElementById("bookList");
+        newGrid.innerHTML = "";
+        bookList.innerHTML = "";
+        books.forEach((b, i) => {
+          const bookElem = document.createElement("div");
+          bookElem.className = "book-item";
+          bookElem.innerHTML = `<img src="${b.image}"><h4>${b.title}</h4><p>${b.author}</p>
+    <button onclick="window.open('${b.pdf}','_blank')">Дидани файл</button>`;
+          if (i < 20) newGrid.appendChild(bookElem);
+          else bookList.appendChild(bookElem);
+        });
+      }
+
+      // Сабт
+      function addBook() {
+        const title = document.getElementById("title").value.trim();
+        const author = document.getElementById("author").value.trim();
+        const imageInput = document.getElementById("image");
+        const pdfInput = document.getElementById("pdf");
+
+        if (
+          !title ||
+          !author ||
+          imageInput.files.length === 0 ||
+          pdfInput.files.length === 0
+        ) {
+          alert("Лутфан ҳама майдонҳоро пур кунед");
+          return;
+        }
+
+        const readerImg = new FileReader();
+        const readerPdf = new FileReader();
+
+        readerImg.onload = function (eImg) {
+          readerPdf.onload = function (ePdf) {
+            books.push({
+              title,
+              author,
+              image: eImg.target.result,
+              pdf: ePdf.target.result,
+            });
+            localStorage.setItem("books", JSON.stringify(books));
+            renderBooks();
+            document.getElementById("title").value = "";
+            document.getElementById("author").value = "";
+            document.getElementById("image").value = "";
+            document.getElementById("pdf").value = "";
+            alert("Китоб сабт шуд!");
+          };
+          readerPdf.readAsDataURL(pdfInput.files[0]);
+        };
+        readerImg.readAsDataURL(imageInput.files[0]);
+      }
+
+      // Registration / Login (simplified)
+      function registerUser() {
+        const u = document.getElementById("regUser").value.trim();
+        const p = document.getElementById("regPass").value.trim();
+        if (!u || !p) {
+          alert("Лутфан ҳамаи майдонҳоро пур кунед");
+          return;
+        }
+        let users = JSON.parse(localStorage.getItem("users") || "[]");
+        if (users.find((x) => x.user === u)) {
+          alert("Корбар аллакай ҳаст");
+          return;
+        }
+        users.push({ user: u, pass: p });
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Бақайдгирӣ муваффақият шуд");
+        document.getElementById("regUser").value = "";
+        document.getElementById("regPass").value = "";
+      }
+
+      function loginUser() {
+        const u = document.getElementById("loginUser").value.trim();
+        const p = document.getElementById("loginPass").value.trim();
+        let users = JSON.parse(localStorage.getItem("users") || "[]");
+        if (users.find((x) => x.user === u && x.pass === p)) {
+          alert("Воридшавӣ муваффақият шуд");
+        } else alert("Номи корбар ё рамз нодуруст аст");
+      }
+
+      // Аввал
+      renderBooks();
+    </script>
+  </body>
+</html>
